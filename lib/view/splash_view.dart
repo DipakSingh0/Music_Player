@@ -12,7 +12,7 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
 
-  final splashVM = Get.put(SplashViewModel());
+  final splashVM = Get.put(SplashViewMode());
 
   @override
   void initState() {
