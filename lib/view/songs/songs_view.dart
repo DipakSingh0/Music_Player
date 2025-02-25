@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:music_player/common/color_extension.dart';
+import 'package:music_player/view/songs/all_songs_view.dart';
+import 'package:music_player/view/songs/playlists_view.dart';
 import 'package:music_player/view_model/splash_view_model.dart';
 
 class SongsView extends StatefulWidget {
@@ -118,8 +120,8 @@ class _SongsViewState extends State<SongsView> with SingleTickerProviderStateMix
             child: TabBarView(
               controller: controller,
               children: [
-                const Center(child: Text("All Songs")),
-                const Center(child: Text("Playlists")),
+                const AllSongsView(),
+                const PlaylistsView(),
                 const Center(child: Text("ALbums")),
                 const Center(child: Text("Artists")),
                 const Center(child: Text("Generes")),
