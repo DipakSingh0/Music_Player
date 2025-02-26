@@ -58,16 +58,7 @@ class MyPlaylistsSongsCell extends StatelessWidget {
                 ],
               ),
             ),
-            // Align(
-            //   alignment: Alignment.bottomRight,
-            //   child: InkWell(
-            //       onTap: onPressedPlay,
-            //       child: Image.asset(
-            //         "assets/img/play.png",
-            //         width: 25,
-            //         height: 25,
-            //       )),
-            // ),
+         
           ],
         ),
       ),
