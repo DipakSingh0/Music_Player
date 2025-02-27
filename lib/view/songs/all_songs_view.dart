@@ -36,7 +36,7 @@ class _AllSongsViewState extends State<AllSongsView> {
             }
             );
         })
-      )
+      ),
     );
   }
 }

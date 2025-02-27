@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:music_player/common/color_extension.dart';
 import 'package:music_player/common_widgets/player_bottom_button.dart';
+import 'package:music_player/view/main_player/driver_mode_view.dart';
+import 'package:music_player/view/main_player/play_playlist_view.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class MainPlayerView extends StatefulWidget {
@@ -64,7 +66,9 @@ class _MainPlayerViewState extends State<MainPlayerView> {
               ),
               padding: EdgeInsets.zero,
               onSelected: (selectedIndex){
-
+                if(selectedIndex == 9){
+                  Get.to(() => DriverModeView());
+                }
               },
               itemBuilder: (context) {
                 return [
@@ -109,7 +113,7 @@ class _MainPlayerViewState extends State<MainPlayerView> {
                   const PopupMenuItem(
                       value: 9,
                       height: 25,
-                      child: Text("Equlaizer", style: TextStyle(fontSize: 12))),
+                      child: Text("Driver Mode", style: TextStyle(fontSize: 12))),
                 ];
               },
             ),
@@ -290,7 +294,9 @@ class _MainPlayerViewState extends State<MainPlayerView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 PlayerBottomButton(
-                    title: "Playlist", icon: "assets/img/playlist.png", onPressed: (){}),
+                    title: "Playlist", icon: "assets/img/playlist.png", onPressed: (){
+                      Get.to(() => PlayPlaylistView());
+                    }),
                 PlayerBottomButton(
                     title: "Shuffle", icon: "assets/img/shuffle.png", onPressed: () {}),
                 PlayerBottomButton(
