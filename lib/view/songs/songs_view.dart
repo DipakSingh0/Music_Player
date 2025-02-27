@@ -5,6 +5,7 @@ import 'package:music_player/common/color_extension.dart';
 import 'package:music_player/view/songs/album_view.dart';
 import 'package:music_player/view/songs/all_songs_view.dart';
 import 'package:music_player/view/songs/artists_view.dart';
+import 'package:music_player/view/songs/generes_view.dart';
 import 'package:music_player/view/songs/playlists_view.dart';
 import 'package:music_player/view_model/splash_view_model.dart';
 
@@ -15,7 +16,8 @@ class SongsView extends StatefulWidget {
   State<SongsView> createState() => _SongsViewState();
 }
 
-class _SongsViewState extends State<SongsView> with SingleTickerProviderStateMixin{
+class _SongsViewState extends State<SongsView>
+    with SingleTickerProviderStateMixin {
   TabController? controller;
   int selectTab = 0;
 
@@ -73,19 +75,21 @@ class _SongsViewState extends State<SongsView> with SingleTickerProviderStateMix
         body: Column(
           children: [
             SizedBox(
-              height: kToolbarHeight ,
+              height: kToolbarHeight,
               child: TabBar(
                 isScrollable: true,
                 indicatorPadding: EdgeInsets.symmetric(horizontal: 20),
                 controller: controller,
                 indicatorColor: TColor.focus,
+                unselectedLabelColor: TColor.primaryText80,
                 labelStyle: TextStyle(
                   color: TColor.focus,
-                  fontSize: 15 ,
+                  fontSize: 15,
                   fontWeight: FontWeight.w700,
+                  // unselectedLabelColor: TColor.primaryText80,
                 ),
                 unselectedLabelStyle: TextStyle(
-                  color: TColor.primaryText60,
+                  color: TColor.primaryText80,
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
                 ),
@@ -97,40 +101,31 @@ class _SongsViewState extends State<SongsView> with SingleTickerProviderStateMix
                   Tab(
                     text: "Playlists",
                     // height: 25,
-
                   ),
                   Tab(
                     text: "Albums",
                     // height: 25,
-
                   ),
                   Tab(
                     text: "Artists",
                     // height: 25,
-
                   ),
                   Tab(
                     text: "Geners",
                     // height: 25,
-
                   ),
                 ],
               ),
             ),
-         
-          Expanded(
-            child: TabBarView(
-              controller: controller,
-              children: const [
-                 AllSongsView(),
-                 PlaylistsView(),
-                 AlbumsView(),
-                 ArtistsView(),
-                 Center(child: Text("Generes")),
-            ]),
-
-          )
-
+            Expanded(
+              child: TabBarView(controller: controller, children: const [
+                AllSongsView(),
+                PlaylistsView(),
+                AlbumsView(),
+                ArtistsView(),
+                GeneresView(),
+              ]),
+            )
           ],
         ));
   }

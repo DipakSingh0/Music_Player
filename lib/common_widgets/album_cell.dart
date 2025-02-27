@@ -113,6 +113,7 @@ class AlbumCell extends StatelessWidget {
                   ),
                 ),
            
+            
               ],
             ),
             const SizedBox(height: 4),
