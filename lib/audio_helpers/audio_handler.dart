@@ -182,9 +182,93 @@ class MyAudioHandler extends BaseAudioHandler implements AudioPlayerHandler {
     await playlist.move(currentIndex, newIndex);
   }
 
+   @override
+  Future<void> removeQueueItemAt(int index) async {
+    await playlist.removeRange(0 , index);
+    final newQueue = queue.value..clear();
+    queue.add(newQueue);
+  }
+
   @override
   Future<void> removeQueueItemIndex(int index) async {
     await playlist.removeAt(index);
+  }
+
+  @override
+  Future<void> play() async {
+    await player.play();
+  }
+
+  @override
+  Future<void> pause() async {
+    await player.pause();
+  }
+
+  @override
+  Future<void> seek(Duration position) async {
+    await player.seek(position);
+  }
+
+  @override
+  Future<void> skipToQueueItem(int index) async {
+    if (index < 0 || index >= queue.value.length) return;
+    if (player.shuffleModeEnabled) {
+      index = player.shuffleIndices![index];
+    }
+    player.seek(Duration.zero, index: index);
+  }
+
+  @override
+  Future<void> skipToNext() async {
+    await player.seekToNext();
+  }
+
+  @override
+  Future<void> skipToPrevious() async {
+    await player.seekToPrevious();
+  }
+
+  @override
+  Future<void> setRepeatMode(AudioServiceRepeatMode repeatMode) async {
+    switch (repeatMode) {
+      case AudioServiceRepeatMode.none:
+        player.setLoopMode(LoopMode.off);
+        break;
+      case AudioServiceRepeatMode.one:
+        player.setLoopMode(LoopMode.one);
+        break;
+      case AudioServiceRepeatMode
+            .group: // Note: AudioServiceRepeatMode.group is not used in the switch
+      case AudioServiceRepeatMode.all:
+        player.setLoopMode(LoopMode.all);
+        break;
+    }
+  }
+
+   @override
+  Future<void> setShuffleMode(AudioServiceShuffleMode shuffleMode) async {
+    if (shuffleMode == AudioServiceShuffleMode.none) {
+      player.setShuffleModeEnabled(false);
+    } else {
+      player.shuffle();
+      player.setShuffleModeEnabled(true);
+    }
+  }
+
+  @override
+  Future customAction(String name, [Map<String, dynamic>? extras]) async {
+    if (name == 'dispose') {
+      await player.dispose();
+      super.stop();
+    }
+  }
+
+  @override
+  Future<void> stop() async {
+    await player.stop();
+    playbackState.add(playbackState.value
+        .copyWith(processingState: AudioProcessingState.idle));
+    return super.stop();
   }
 
   @override
